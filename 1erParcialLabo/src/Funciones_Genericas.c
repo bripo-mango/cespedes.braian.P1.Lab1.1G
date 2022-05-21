@@ -147,7 +147,7 @@ char GetChar(char mensaje[], char messageError[])
 	fflush(stdin);
 	scanf("%c", &aux);
 
-	while((Validatechar(aux) == 0) && (aux != 'c' || aux != 'a'))
+	while((Validatechar(aux) == 0) || !(aux == 'c' || aux == 'a'))
 	{
 		printf("%s", messageError);
 		fflush(stdin);
@@ -165,7 +165,7 @@ char GetCharConfirmacion(char mensaje[], char messageError[])
 	fflush(stdin);
 	scanf("%c", &aux);
 
-	while((Validatechar(aux) == 0) && (aux != 's' || aux != 'n'))
+	while((Validatechar(aux) == 0) || !(aux == 's' || aux == 'n'))
 	{
 		printf("%s", messageError);
 		fflush(stdin);
@@ -244,7 +244,6 @@ char Validatechar(char caracter)
 	char aux = 0;
 
 	if(isalpha(caracter) != 0)
-
 	{
 		aux = caracter;
 	}

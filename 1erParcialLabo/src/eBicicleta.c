@@ -3,49 +3,15 @@
 
 void InitBicicleta(eBicicleta *listaBicileta, int tam)
 {
-	int i;
-
 	if(listaBicileta != NULL && tam > 0)
 	{
-		for(i=0; i<tam; i++)
+		for(int i=0; i<tam; i++)
 		{
 			listaBicileta[i].isEmpty = TRUE;
 		}
 	}
 }
 
-/*
-void ForceBicicleta(eBicicleta *listaBicileta, int *idPassenger, int tam, int *pFlag)
-{
-	char name[][TAMA] = {"Juan", "Mario", "Pedro", "Cristian"};
-	char lastName[][TAMA] = {"Lopez", "Caastanieda", "Responde", "Saliba"};
-	float price[] = {450,100,900,500};
-	char flyCode[][TAMA] = {"PLF1","RNT2","H4TJ","Q2R6"};
-	int type[] = {0,1,0,1};
-	int status[] = {1,1,0,2};
-
-	if(listaBicileta != NULL && tam > 0 && idPassenger != NULL)
-	{
-		for(int i=0; i<tam; i++)
-		{
-			if(listaBicileta[i].isEmpty == TRUE && idPassenger != NULL && listaBicileta != NULL)
-			{
-				listaBicileta[i].id = eGen_ObtenerID(*idPassenger);
-				strcpy(listaBicileta[i].marca, name[i]);
-				strcpy(listaBicileta[i].lastName, lastName[i]);
-				listPassenger[i].price = price[i];
-				strcpy(listPassenger[i].flyCode, flyCode[i]);
-				listPassenger[i].typePassenger = type[i];
-				listPassenger[i].statusFlight = status[i];
-				listPassenger[i].isEmpty = FALSE;
-				*idPassenger = listPassenger[i].id;
-			}
-		}
-	}
-	*pFlag = 1;
-}
-
-*/
 int FindBicicleta(eBicicleta *listaBicileta, int tam, int id, int* pIndex)
 {
     int todoOk = 0;
@@ -58,17 +24,47 @@ int FindBicicleta(eBicicleta *listaBicileta, int tam, int id, int* pIndex)
             if(!listaBicileta[i].isEmpty && listaBicileta[i].id == id)
             {
                 *pIndex = i;
+                 todoOk = 1;
                  break;
             }
         }
-        todoOk = 1;
     }
     return todoOk;
 }
 
+void ForceBicicleta(eBicicleta *listBici, int tam, int *pId, int *pFlag)
+{
+	int id = 1;
+	char marca[][TAMA] = {"Daylight", "Monster", "Loude", "Hank"};
+	int idTipo[] = {1000, 1003, 1001, 1002};
+	int idColor[] = {5001, 5002, 5003, 5004};
+	char material[] = {'c', 'a', 'c', 'a'};
+	int rodado[] = {23, 25, 20, 35};
+
+	if(listBici != NULL && tam > 0)
+	{
+		for(int i=0; i<tam; i++)
+		{
+			if(listBici[i].isEmpty == TRUE)
+			{
+				listBici[i].id = id;
+				strcpy(listBici[i].marca, marca[i]);
+				listBici[i].idTipo = idTipo[i];
+				listBici[i].idColor = idColor[i];
+				listBici[i].material = material[i];
+				listBici[i].rodado = rodado[i];
+				listBici[i].isEmpty = FALSE;
+				*pId = id;
+				id++;
+			}
+		}
+	}
+	*pFlag = 1;
+}
+
 void PrintOnlyOneBicicleta(eBicicleta *listaBicileta)
 {
-	printf("\n*%2d %12s %2d %2d %2c %4d\n\n",  listaBicileta->id,
+	printf("\n* %2d %12s %9d %10d %9c %10d\n\n",  listaBicileta->id,
 														 listaBicileta->marca,
 														 listaBicileta->idColor,
 														 listaBicileta->idTipo,
@@ -132,6 +128,40 @@ void RemoveBicicleta(eBicicleta *listaBicileta, int tam, int index, char *mensaj
 	}
 }
 
+int ListarBicicletasPorId(eBicicleta *listBici, int tam)
+{
+    int todoOk = 0;
+    eBicicleta auxBici;
+
+    if(listBici != NULL && tam > 0)
+    {
+        for(int i=0; i < tam - 1; i++)
+        {
+            for(int j= i+1; j < tam; j++)
+            {
+            	if(listBici[i].isEmpty == FALSE && listBici[j].isEmpty == FALSE)
+            	{
+            	/*
+                if( strcmp(vec[i].nombre, vec[j].nombre) > 0 )
+                {
+                    auxEmpleado = vec[i];
+                    vec[i] = vec[j];
+                    vec[j] = auxEmpleado;
+                }
+                */
+            		if(listBici[i].id > listBici[j].id)
+            		{
+            			auxBici = listBici[i];
+            			listBici[i] = listBici[j];
+            	      	listBici[j] = auxBici;
+            		}
+            	}
+            }
+        }
+        todoOk = 1;
+    }
+    return todoOk;
+}
 
 /*
 float PricesPlus(ePassenger *listPassenger, int tam)
@@ -200,4 +230,3 @@ int ShowAveragePassenger(ePassenger *listPassenger, int tam)
 
 
 */
-

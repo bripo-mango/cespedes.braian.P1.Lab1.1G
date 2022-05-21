@@ -17,7 +17,6 @@ typedef struct
 	int idServicio;
 	eFecha fecha;
 	int isEmpty;
-
 }eTrabajo;
 
 

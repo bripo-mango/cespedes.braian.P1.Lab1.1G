@@ -16,9 +16,10 @@ void InitServicio(eServicio *listServicio, int tam)
 
 void ForceServicio(eServicio *listServicio, int tam)
 {
-
 	char description[][TAMA] = {"Limpieza", "Parche", "Centrado", "Cadena"};
 	float precio[] = {30, 400, 500, 450};
+	int id = 20000;
+
 
 	if(listServicio != NULL && tam > 0)
 	{
@@ -26,10 +27,11 @@ void ForceServicio(eServicio *listServicio, int tam)
 		{
 			if(listServicio[i].isEmpty == TRUE && listServicio != NULL)
 			{
-				listServicio[i].id = eGen_ObtenerID(4999);
+				listServicio[i].id = eGen_ObtenerID(id);
 				strcpy(listServicio[i].descripcion, description[i]);
 				listServicio[i].precio = precio[i];
 				listServicio[i].isEmpty = FALSE;
+				id++;
 			}
 		}
 	}
@@ -61,10 +63,10 @@ int FindeServicio(eServicio *listServicio, int tam, int id, int* pIndex)
             if(!listServicio[i].isEmpty && listServicio[i].id == id)
             {
                 *pIndex = i;
+                 todoOk = 1;
                  break;
             }
         }
-        todoOk = 1;
     }
     return todoOk;
 }
@@ -73,7 +75,7 @@ void PrintOneServicio(eServicio *listServicio)
 {
 	if(listServicio != NULL)
 	{
-		printf("\n*%4d %9s\n", listServicio->id,
+		printf("\n* %4d %13s\n", listServicio->id,
 							   listServicio->descripcion);
 	}
 }

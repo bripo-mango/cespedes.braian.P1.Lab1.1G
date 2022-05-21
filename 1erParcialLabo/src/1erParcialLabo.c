@@ -10,7 +10,8 @@ int main(void)
 		int seguir;
 		int continuar;
 		int Flag = 0;
-
+		int idIncremental = 0;
+		int idIncrementalTrabajo = 99;
 
 		eBicicleta listBicicleta[SIZE];
 		eServicio listServicio[SIZE];
@@ -27,16 +28,16 @@ int main(void)
 		ForceColor(listColor, 5);
 		ForceServicio(listServicio, 4);
 		ForceTipo(listTipo, 4);
+		ForceBicicleta(listBicicleta, 4, &idIncremental, &Flag);
 
-		//ForcePassengers(listPassenger, &IdPassenger, 4, pFlag);
 		do
 			{
 				system("cls");
 				printf("#### Menu de Ingresos ###");
 				printf("\n\n1-Ingreso nuevas bicicletas.\n");
-				printf("2-Modificar bicis existentes.\n");
-				printf("3-Eliminar bicis existentes.\n");
-				printf("4-Informar bicis existentes.\n");
+				printf("2-Modificar bicicletas existentes.\n");
+				printf("3-Eliminar bicicletas existentes.\n");
+				printf("4-Menu listados.\n");
 				printf("5-Cargar Trabajo.\n");
 				printf("6-Salir.\n");
 				fflush(stdin);
@@ -46,8 +47,9 @@ int main(void)
 				{
 					case 1:
 						system("cls");
-						addOneBicicletas(listBicicleta, SIZE, eGen_ObtenerID(0), listTipo, 4, listColor, 4);
+						addOneBicicletas(listBicicleta, SIZE, eGen_ObtenerID(idIncremental), listTipo, 4, listColor, 5);
 						Flag = 1;
+						idIncremental++;
 
 					    	break;
 
@@ -55,12 +57,12 @@ int main(void)
 
 						if(Flag != 0)
 						{
-							ModifyBicicletas(listBicicleta, SIZE, listTipo, 4, listColor, 4);
+							ModifyBicicletas(listBicicleta, SIZE, listTipo, 4, listColor, 5);
 							system("cls");
 						}
 						else
 						{
-							printf("\nTiene que haber una bicicleta cargada para poder acceder a esta opcion.\n\n");
+							printf("\nTiene que existir una bicicleta cargada para poder acceder a esta opcion.\n\n");
 							system("pause");
 							system("cls");
 						}
@@ -71,12 +73,12 @@ int main(void)
 						if(Flag != 0)
 						{
 							system("cls");
-							DeleteBicicletas(listBicicleta, SIZE, listTipo, 4, listColor, 4);
+							DeleteBicicletas(listBicicleta, SIZE, listTipo, 4, listColor, 5);
 							system("cls");
 						}
 						else
 						{
-							printf("\nTiene que haber un pasajero registrado para poder acceder a esta opcion.\n\n");
+							printf("\nTiene que existir una bicicleta cargada para poder acceder a esta opcion.\n\n");
 							system("pause");
 							system("cls");
 						}
@@ -97,15 +99,26 @@ int main(void)
 					}
 					else
 					{
-						printf("\nTiene que haber un pasajero registrado para poder acceder a esta opcion.\n\n");
+						printf("\nTiene que existir una bicicleta cargada para poder acceder a esta opcion.\n\n");
 						system("pause");
 						system("cls");
 					}
 				    	break;
 
 					case 5:
-						AddTrabajos(eGen_ObtenerID(99), listBicicleta, SIZE, listServicio, 4, listTipo, 4, listColor, 5);
+
+					if(Flag != 0)
+					{
+						AddOneTrabajo(listTrabajo, SIZE_STRING, listBicicleta, SIZE_STRING, eGen_ObtenerID(idIncrementalTrabajo), listServicio, 4, listTipo, 4, listColor, 5);
+						idIncrementalTrabajo++;
 						system("cls");
+					}
+					else
+					{
+						printf("\nTiene que existir una bicicleta cargada para poder acceder a esta opcion.\n\n");
+						system("pause");
+						system("cls");
+					}
 			            break;
 				}
 			}while(seguir != 6);

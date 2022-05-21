@@ -48,10 +48,10 @@ int FindTrabajo(eTrabajo *listTrabajo, int tam, int id, int* pIndex)
             if(!listTrabajo[i].isEmpty && listTrabajo[i].id == id)
             {
                 *pIndex = i;
+                 todoOk = 1;
                  break;
             }
         }
-        todoOk = 1;
     }
     return todoOk;
 }
@@ -74,3 +74,7 @@ int FindFreeIndexeTrabajo(eTrabajo *listaTrabajo, int tam)
 	}
 	return index;
 }
+
+
+
+

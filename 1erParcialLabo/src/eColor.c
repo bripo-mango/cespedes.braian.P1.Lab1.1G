@@ -59,10 +59,10 @@ int FindeColor(eColor *listColor, int tam, int id, int* pIndex)
             if(!listColor[i].isEmpty && listColor[i].idStatus == id)
             {
                 *pIndex = i;
+                 todoOk = 1;
                  break;
             }
         }
-        todoOk = 1;
     }
     return todoOk;
 }
@@ -71,8 +71,8 @@ void PrintOneeColor(eColor *listColor)
 {
 	if(listColor != NULL)
 	{
-		printf("\n*%4d %9s\n", listColor->idStatus,
-							   listColor->description);
+		printf("\n* %4d %13s\n", listColor->idStatus,
+							    listColor->description);
 	}
 }
 

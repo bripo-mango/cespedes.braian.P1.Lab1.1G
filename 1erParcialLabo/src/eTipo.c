@@ -60,10 +60,10 @@ int FindTipo(eTipo *listTipo, int tam, int id, int* pIndex)
             if(!listTipo[i].isEmpty && listTipo[i].idStatus == id)
             {
                 *pIndex = i;
+                 todoOk = 1;
                  break;
             }
         }
-        todoOk = 1;
     }
     return todoOk;
 }
@@ -72,7 +72,7 @@ void PrintOneTipo(eTipo *listTipo)
 {
 	if(listTipo != NULL)
 	{
-		printf("\n*%4d %9s\n", listTipo->idStatus,
+		printf("\n* %4d %13s\n", listTipo->idStatus,
 							   listTipo->description);
 	}
 }
